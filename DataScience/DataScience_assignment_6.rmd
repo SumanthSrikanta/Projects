@@ -1,0 +1,130 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(lubridate)
+library(tidyverse)
+```
+
+
+```{r}
+install.packages("nycflights13")
+```
+
+
+```{r}
+library(nycflights13)
+```
+
+
+```{r}
+flightsEdited<-flights %>%
+mutate(date=make_date(year, month, day))
+```
+
+
+```{r}
+flightsEdited
+```
+
+
+```{r}
+flightsEdited %>%
+  select(year, month , day, date) 
+flightsEdited
+```
+
+
+```{r}
+daily<-flightsEdited %>%
+group_by(date) %>%
+summarise(n=n())
+(daily)
+```
+
+
+```{r}
+ggplot(daily, aes(date, n)) + geom_line()
+```
+
+
+```{r}
+updatedFlightsEdited<-flightsEdited %>%
+  mutate(weekday=wday(date, label=TRUE)) %>%
+  mutate(month=month(date ,label=TRUE))
+(updatedFlightsEdited)
+```
+Exercise 
+
+1. Select just the data for January and compute the daily number of 
+flights. Use ggplot to plot the data.
+
+```{r}
+daily<-flightsEdited %>% 
+  group_by(date) %>% 
+  summarise(count=n()) 
+daily_jan <- daily[1:31, ]
+print(daily_jan)
+
+ggplot(daily_jan, aes(date, count)) + geom_line()
+```
+
+2. Group the data by weekday and month and visualise which days and months have the most flights going to/from NYC (the main airports to NYC are JFK and LGA).
+
+```{r}
+a <- updatedFlightsEdited %>%
+  group_by(weekday, month) %>%
+  summarise(flight_count=n())
+b <- a[order(-a$flight_count),]
+b
+```
+
+
+```{r}
+ggplot(b, aes(x = month, y = flight_count,fill=weekday)) +
+        geom_bar(stat='identity')
+```
+```{r}
+data("mtcars")
+str(mtcars)
+```
+
+
+```{r}
+mcor <- cor(mtcars)
+round(mcor, digits=2)
+```
+
+
+```{r}
+install.packages("corrplot")
+library(corrplot)
+corrplot(mcor)
+```
+
+
+```{r}
+install.packages("GGally")
+library("GGally")
+ggcorr(mcor)
+```
+
+3. Using the cor.test() function, determine the actual correlation score between cyl and disp
+
+```{r}
+corr_value<- cor.test(mtcars$cyl, mtcars$disp,method = "pearson")
+corr_value
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+

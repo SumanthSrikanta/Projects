@@ -1,0 +1,71 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(tidyverse)
+head(mpg)
+```
+1. Filter rows where the manufacturer is Audi or the year of production (year) is 1999.
+
+```{r}
+q1<-filter(mpg, manufacturer=='audi' | year == 1999)
+q1
+```
+
+2. Filter rows where the year of production (year) is 1999 and the manufacturer is NOT Audi.
+```{r}
+q2 <- filter(mpg, year == 1999 , !manufacturer=='audi')
+q2
+```
+
+
+```{r}
+df <- read.csv("/Users/varun/Desktop/Data science/Assignment_2/Beijing2022.csv", header = TRUE, stringsAsFactors = FALSE)
+View(df)
+library(stringr)
+new <- str_split_fixed(df$Country, ";", 4)
+View(new)
+df
+
+```
+3. To better view the ordered tibble, pipe the results of the arrange function into the function View. Make sure that ties between countries with the same number of gold and silver medals are sorted based on the number of bronze medals.
+
+```{r}
+arrange(df ,Countr)
+q3 <- arrange(df , desc(Gold), desc(Silver), desc(Bronze))
+q3
+```
+
+4. How many unique models do each manufacturer produce?
+
+```{r}
+q4 <- group_by(mpg, manufacturer) %>% summarise(unique_models = length(unique(model)))
+q4
+```
+5. Create a new column with a ratio of highway (hwy) vs city (cty) range called HwyCtyRatio
+
+```{r}
+Ratio<-mutate(mpg, HwyCtyRatio = round((hwy/cty), 2))
+Ratio
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+

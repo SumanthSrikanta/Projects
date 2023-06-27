@@ -1,0 +1,152 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+x <- c(1.2,2.3,0.2,1.1)
+x
+```
+
+
+```{r}
+class_x <- class(x)
+class_x
+
+```
+
+
+```{r}
+element2 <- x[2]
+element2
+```
+
+
+```{r}
+element2n3 <- x[2:3]
+element2n3
+```
+
+
+```{r}
+x = replace(x, x==1.2, 5)
+x
+```
+
+
+```{r}
+x1 = x[x>2]
+greater
+```
+
+
+```{r}
+x.squared <- x^2
+x.squared
+
+```
+
+
+```{r}
+x <-c(x, 5.2)
+x
+```
+
+
+```{r}
+x_mean = mean(x)
+x_mean
+```
+
+
+```{r}
+no_days= c(31,29,31,30,31,30,31,31,30,31,30,31)
+names= c("jan","Feb","march","Apr","may","jun","jul","aug","sep","oct","nov","dec")
+names(no_days)=c("jan","Feb","march","Apr","may","jun","jul","aug","sep","oct","nov","dec")
+calender = no_days
+calender
+
+Total_days= sum(no_days)
+Total_days
+
+```
+
+
+```{r}
+P = matrix(c(2,4,3,1,5,7),nrow=2,ncol=3, byrow=TRUE)
+P
+
+```
+
+
+```{r}
+df<-data.frame(P)
+df
+```
+```{r}
+rowSums(df[c(1),],)
+```
+
+```{r}
+colSums(df[c(1)],)
+```
+
+
+```{r}
+dimnames(P)=list(c("Row1","Row2"),c("Col1","Col2","Col3"))
+P
+```
+
+
+```{r}
+P["Row2",]
+```
+
+
+```{r}
+P = subset(P, select=-c(3))
+P
+```
+
+
+```{r}
+P <- cbind(P,c(3,7))
+P
+```
+
+
+```{r}
+Olympics=matrix(c(1,2,1,7,7,4,0,2,0,1,0,1,4,8,14),nrow=5,ncol = 3,byrow = TRUE)
+Olympics
+```
+
+
+```{r}
+dimnames(Olympics)=list(c("Australia","Austria","Belarus","Belgium","Canada"),c("Gold","Silver","Bronze"))
+Olympics
+```
+
+```{r}
+a <- list("a",1 , c(4,5,6))
+a
+```
+```{r}
+d[c(1,3)]
+```
+
+```{r}
+v=list(One=c(a), Two=c(1), Three= c(4,5,6))
+v
+```
+
+
+```{r}
+a[c("One","Three")]
+
+```
+
+
